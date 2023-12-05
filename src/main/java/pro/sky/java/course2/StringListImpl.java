@@ -1,29 +1,53 @@
 package pro.sky.java.course2;
 
+import pro.sky.java.course2.exception.ListFillException;
 import pro.sky.java.course2.exception.NotFoundElement;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Optional;
 
-public class StringListImpl implements StringList{
-    final String [] list;
+public class StringListImpl implements StringList {
+    final String[] list;
+    static int count = 0;
 
     public StringListImpl(int size) {
         this.list = new String[size];
     }
 
     @Override
-    public String add(String item) {
-        if (item==null){
-           throw new NullPointerException("Элемент пустой");
+    public String toString() {
+        return
+                "list=" + Arrays.toString(list);
+    }
 
-                    }
-        if (list[list.length-1]==null){
-            int i=0;
-            while (list[i]!=null){i++;}
-            list[i]=item;
-            return item + " под индексом " + i;
+    public void ifNull(String str) {
+        if (str == null) {
+            throw new NullPointerException("Элемент пустой");
+
         }
-        else {
+
+    }
+
+    public void ifBadIndex(int in) {
+        if (in < 0 && in > (list.length - 1)) {
+            throw new ArrayIndexOutOfBoundsException("индекс выходит за границы размера списка");
+        }
+    }
+
+    @Override
+    public String add(String item) {
+
+        ifNull(item);
+        if (list[list.length - 1] == null) {
+            int i = 0;
+            while (list[i] != null) {
+                i++;
+            }
+            list[i] = item;
+            count++;
+            return item + " под индексом " + i;
+        } else {
             String s2 = "Лист заполнен";
             return s2;
         }
@@ -32,80 +56,122 @@ public class StringListImpl implements StringList{
 
     @Override
     public String add(int index, String item) {
-        if (index>(list.length-1)){
-            throw new ArrayIndexOutOfBoundsException("индекс выходит за границы размера списка");
+        ifBadIndex(index);
+        ifNull(item);
+
+        if (list[list.length - 1] == null) {
+            count++;
+            String temp = item;
+            String temp1 = "";
+            for (int i = index; i < list.length; i++) {
+                temp1 = list[i];
+                list[i] = temp;
+                temp = temp1;
+            }
+
+            return list[index];
+        } else {
+            throw new ListFillException("лист заполнен");
         }
-        if (item==null){
-            throw new NullPointerException("Элемент пустой");
-        }
-        list[index]=item;
-                return list[index];
     }
 
     @Override
     public String set(int index, String item) {
-        return null;
-    }
-
-    @Override
-    public String remove(String item) {
-        int i=0;
-        while (!list[i].equals(item)){i++;}
-        if (i == list.length) {
-            throw new NotFoundElement("элемента нет в списке");
-        }
-        list[i]=null;
+        ifBadIndex(index);
+        ifNull(item);
+        list[index] = item;
         return item;
     }
 
     @Override
-    public String remove(int index) {
+    public String remove(String item) {
+        int i = 0;
+        while (!list[i].equals(item)) {
+            i++;
+        }
+        if (i >= list.length) {
+            throw new NotFoundElement("элемента нет в списке");
+        } else {
+            list[i] = null;
+            while (i < list.length - 2) {
+                list[i] = list[i + 1];
+                list[i + 1] = null;
+                i++;
+            }
+            count--;
 
-        return null;
+            return item;
+        }
     }
+
+    @Override
+    public String remove(int index) {
+        ifBadIndex(index);
+        String temp = list[index];
+        while (index < count) {
+            list[index] = list[index + 1];
+            index++;
+        }
+        count--;
+        return temp;
+    }
+
 
     @Override
     public boolean contains(String item) {
-        return false;
-    }
+       /* int i = 0;
+        while (i < count) {
+            if (!list[i].equals(item))
+                i++;
+            else break;
+        }
+        if (i == count) return false;
+        else return true;*/
+        int i;
+        for ( i=0 ; i < count; i++) {
+            if (list[i].equals(item)) break;
+        }
+        if (i == count) return false;
+        else return true;
+        }
 
-    @Override
-    public int indexOf(String item) {
-        return 0;
-    }
+        @Override
+        public int indexOf (String item){
+            return 0;
+        }
 
-    @Override
-    public int lastIndexOf(String item) {
-        return 0;
-    }
+        @Override
+        public int lastIndexOf (String item){
+            return 0;
+        }
 
-    @Override
-    public String get(int index) {
-        return null;
-    }
+        @Override
+        public String get ( int index){
+            return null;
+        }
 
-    @Override
-    public boolean equals(StringList otherList) {
-        return false;
-    }
+        @Override
+        public boolean equals (StringList otherList){
+            return false;
+        }
 
-    @Override
-    public int size() {
-        return 0;
-    }
+        @Override
+        public int size () {
+            return count;
+        }
 
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
+        @Override
+        public boolean isEmpty () {
+            return false;
+        }
 
-    @Override
-    public void clear() {
+        @Override
+        public void clear () {
 
-    }
+        }
 
-    @Override
-    public String[] toArray() {
-        return new String[0];
+        @Override
+        public String[] toArray () {
+            return new String[0];
+        }
     }
-}
