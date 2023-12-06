@@ -30,7 +30,7 @@ public class StringListImpl implements StringList {
     }
 
     public void ifBadIndex(int in) {
-        if (in < 0 && in > (list.length - 1)) {
+        if (in < 0 || in > (list.length - 1)) {
             throw new ArrayIndexOutOfBoundsException("индекс выходит за границы размера списка");
         }
     }
@@ -85,7 +85,22 @@ public class StringListImpl implements StringList {
 
     @Override
     public String remove(String item) {
-        int i = 0;
+        int i;
+        for (i = 0; i < count; i++) {
+            if (list[i].equals(item)) break;
+        }
+        if (i == count) {
+            throw new NotFoundElement("элемента нет в списке");
+        } else {
+            list[i] = null;
+            while (i < list.length - 2) {
+                list[i] = list[i + 1];
+                list[i + 1] = null;
+                i++;
+            }
+            count--;
+            return item;
+        /*int i = 0;
         while (!list[i].equals(item)) {
             i++;
         }
@@ -101,6 +116,7 @@ public class StringListImpl implements StringList {
             count--;
 
             return item;
+        }*/
         }
     }
 
@@ -128,50 +144,67 @@ public class StringListImpl implements StringList {
         if (i == count) return false;
         else return true;*/
         int i;
-        for ( i=0 ; i < count; i++) {
+        for (i = 0; i < count; i++) {
             if (list[i].equals(item)) break;
         }
         if (i == count) return false;
         else return true;
-        }
-
-        @Override
-        public int indexOf (String item){
-            return 0;
-        }
-
-        @Override
-        public int lastIndexOf (String item){
-            return 0;
-        }
-
-        @Override
-        public String get ( int index){
-            return null;
-        }
-
-        @Override
-        public boolean equals (StringList otherList){
-            return false;
-        }
-
-        @Override
-        public int size () {
-            return count;
-        }
-
-        @Override
-        public boolean isEmpty () {
-            return false;
-        }
-
-        @Override
-        public void clear () {
-
-        }
-
-        @Override
-        public String[] toArray () {
-            return new String[0];
-        }
     }
+
+    @Override
+    public int indexOf(String item) {
+        ifNull(item);
+
+        int i;
+        for (i = 0; i < count; i++) {
+            if (list[i].equals(item)) break;
+        }
+        if (i == count) return -1;
+        else return i;
+
+    }
+
+    @Override
+    public int lastIndexOf(String item) {
+        int i = count - 1;
+        for (i = count - 1; i > -1; i--) {
+            if (list[i].equals(item)) break;
+        }
+        return i;
+
+    }
+
+    @Override
+    public String get(int index) {
+        if (index < 0 || index > (count - 1)) {
+            throw new ArrayIndexOutOfBoundsException("Элемента под таким индексом нет");
+        } else
+            return list[index];
+    }
+
+    @Override
+    public boolean equals(StringList otherList) {
+        if (otherList==null) throw new ListFillException("значение списка null");
+        return Arrays.equals(list,otherList);
+    }
+
+    @Override
+    public int size() {
+        return count;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public String[] toArray() {
+        return new String[0];
+    }
+}
