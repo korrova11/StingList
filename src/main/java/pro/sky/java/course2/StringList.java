@@ -14,5 +14,5 @@ public interface StringList {
     int size();
     boolean isEmpty();
     void clear();
-    String[] toArray();
+    StringList toArray(int size);
 }

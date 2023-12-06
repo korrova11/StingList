@@ -46,10 +46,9 @@ public class StringListImpl implements StringList {
             }
             list[i] = item;
             count++;
-            return item + " под индексом " + i;
+            return item;
         } else {
-            String s2 = "Лист заполнен";
-            return s2;
+            throw new ListFillException("лист заполнен");
         }
 
     }
@@ -123,6 +122,7 @@ public class StringListImpl implements StringList {
     @Override
     public String remove(int index) {
         ifBadIndex(index);
+        if (list[index]==null) throw new NullPointerException("под этим индексом ничего нет");
         String temp = list[index];
         while (index < count) {
             list[index] = list[index + 1];
@@ -208,7 +208,9 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public String[] toArray() {
-        return new String[0];
+    public StringList toArray(int size) {
+          StringList str = new StringListImpl(size);
+          return str;
+
     }
 }
