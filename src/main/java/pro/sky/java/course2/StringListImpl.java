@@ -184,8 +184,9 @@ public class StringListImpl implements StringList {
 
     @Override
     public boolean equals(StringList otherList) {
-        if (otherList==null) throw new ListFillException("значение списка null");
-        return Arrays.equals(list,otherList);
+        if (otherList == null) throw new ListFillException("значение списка null");
+       // return Arrays.equals(list, otherList);
+        return true;
     }
 
     @Override
@@ -195,11 +196,14 @@ public class StringListImpl implements StringList {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        if (list[0] == null) return true;
+        else
+            return false;
     }
 
     @Override
     public void clear() {
+        Arrays.fill(list,null);
 
     }
 
