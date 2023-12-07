@@ -117,7 +117,6 @@ public class StringListTest {
         out2.add(STR1);
         assertTrue(out.equals(out1));
         assertFalse(out.equals(out2));
-
     }
 
     @Test

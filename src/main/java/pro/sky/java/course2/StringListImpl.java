@@ -41,9 +41,10 @@ public class StringListImpl implements StringList {
             throw new ArrayIndexOutOfBoundsException("индекс выходит за границы размера списка");
         }
     }
+
     @Override
-    public boolean equals(StringList otherList){
-        return Arrays.equals(this.toArray(),otherList.toArray());
+    public boolean equals(StringList otherList) {
+        return Arrays.equals(this.toArray(), otherList.toArray());
     }
 
 
@@ -207,7 +208,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String[] toArray() {
-        return Arrays.copyOf(this.list,size);
+        return Arrays.copyOf(this.list, size);
 
     }
 }
