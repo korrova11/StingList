@@ -114,7 +114,7 @@ public class StringListTest {
         out1.add(STR1);
         out1.add(STR2);
         out2.add(STR1);
-        out2.add(STR2);
+        out2.add(STR1);
         assertTrue(out.equals(out1));
         assertFalse(out.equals(out2));
 
@@ -146,10 +146,10 @@ public class StringListTest {
 
     @Test
     public void toArrayTest() {
-        StringList str = out.toArray(3);
-        assertTrue(str.isEmpty());
-        str.add("щщ");
-        assertFalse(str.isEmpty());
+        out.add(STR1);
+        out.add(STR2);
+       assertTrue(out.equals(out.toArray()));
+
 
     }
 }

@@ -3,17 +3,22 @@ package pro.sky.java.course2;
 import pro.sky.java.course2.exception.ListFillException;
 import pro.sky.java.course2.exception.NotFoundElement;
 
-import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Optional;
 
 public class StringListImpl implements StringList {
     final String[] list;
+    int size;
 
     private int count;
 
     public StringListImpl(int size) {
+        this.size = size;
         this.list = new String[size];
+        count = 0;
+    }
+
+    public StringListImpl() {
+        this.list = new String[10];
         count = 0;
     }
 
@@ -36,14 +41,19 @@ public class StringListImpl implements StringList {
             throw new ArrayIndexOutOfBoundsException("индекс выходит за границы размера списка");
         }
     }
-
     @Override
+    public boolean equals(StringList otherList){
+        return Arrays.equals(this.toArray(),otherList.toArray());
+    }
+
+
+   /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StringListImpl that = (StringListImpl) o;
         return Arrays.equals(list, that.list);
-    }
+    }*/
 
     @Override
     public int hashCode() {
@@ -196,9 +206,8 @@ public class StringListImpl implements StringList {
     }
 
     @Override
-    public StringList toArray(int size) {
-        StringList str = new StringListImpl(size);
-        return str;
+    public String[] toArray() {
+        return Arrays.copyOf(this.list,size);
 
     }
 }
