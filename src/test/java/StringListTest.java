@@ -22,6 +22,7 @@ public class StringListTest {
         assertFalse(out.contains(STR2));
         assertThrows(NullPointerException.class, () -> out.add(null));
     }
+
     @Test
     public void addTestWhenFillList() {
         out.add(STR1);
@@ -29,7 +30,7 @@ public class StringListTest {
         out.add(STR1);
         out.add(STR1);
         assertThrows(ListFillException.class, () -> out.add(STR2));
-        assertThrows(ListFillException.class, () -> out.add(1,STR2));
+        assertThrows(ListFillException.class, () -> out.add(1, STR2));
     }
 
     @Test
@@ -51,56 +52,63 @@ public class StringListTest {
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> out.set(-1, STR1));
 
     }
+
     @Test
-    public void removeTest(){
+    public void removeTest() {
         out.add(STR1);
         out.remove(STR1);
         assertFalse(out.contains(STR1));
-        assertThrows(NotFoundElement.class,()->out.remove(STR2));
+        assertThrows(NotFoundElement.class, () -> out.remove(STR2));
 
     }
+
     @Test
-    public void removeByIndexTest(){
-        out.add(0,STR1);
+    public void removeByIndexTest() {
+        out.add(0, STR1);
         out.remove(0);
         assertFalse(out.contains(STR1));
-        assertThrows(NullPointerException.class,()->out.remove(2));
+        assertThrows(NullPointerException.class, () -> out.remove(2));
 
     }
+
     @Test
-    public void containsTest(){
+    public void containsTest() {
         out.add(STR1);
         assertTrue(out.contains(STR1));
         assertFalse(out.contains(STR2));
 
     }
+
     @Test
-    public void indexOfTest(){
+    public void indexOfTest() {
         out.add(STR1);
 
-        assertTrue(out.indexOf(STR1)==0);
-        assertTrue(out.indexOf(STR2)==-1);
+        assertTrue(out.indexOf(STR1) == 0);
+        assertTrue(out.indexOf(STR2) == -1);
 
     }
+
     @Test
-    public void indexLastOfTest(){
+    public void indexLastOfTest() {
         out.add(STR1);
 
-        assertTrue(out.lastIndexOf(STR1)==0);
-        assertTrue(out.lastIndexOf(STR2)==-1);
+        assertTrue(out.lastIndexOf(STR1) == 0);
+        assertTrue(out.lastIndexOf(STR2) == -1);
 
     }
+
     @Test
     public void getTest() {
         out.add(STR1);
         assertTrue(out.get(0).equals(STR1));
         assertFalse(out.get(0).equals(STR2));
-        assertThrows(ArrayIndexOutOfBoundsException.class,()->out.get(-5));
-        assertThrows(ArrayIndexOutOfBoundsException.class,()->out.get(1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> out.get(-5));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> out.get(1));
 
     }
+
     @Test
-    public void equalsTest(){
+    public void equalsTest() {
         out.add(STR1);
         out.add(STR2);
         out1.add(STR1);
@@ -111,33 +119,37 @@ public class StringListTest {
         assertFalse(out.equals(out2));
 
     }
+
     @Test
-    public void sizeTest(){
+    public void sizeTest() {
         out.add(STR1);
         out.add(STR2);
-        assertTrue(out.size()==2);
+        assertTrue(out.size() == 2);
 
     }
+
     @Test
-    public void isEmptyTest(){
+    public void isEmptyTest() {
         assertTrue(out.isEmpty());
         out1.add(STR1);
         assertFalse(out1.isEmpty());
     }
+
     @Test
-    public void clearTest(){
+    public void clearTest() {
         out.add(STR1);
         out.add(STR2);
         out.clear();
         assertTrue(out.isEmpty());
 
     }
+
     @Test
-    public void toArrayTest(){
-       StringList str = out.toArray(3);
+    public void toArrayTest() {
+        StringList str = out.toArray(3);
         assertTrue(str.isEmpty());
         str.add("щщ");
         assertFalse(str.isEmpty());
 
     }
-    }
+}

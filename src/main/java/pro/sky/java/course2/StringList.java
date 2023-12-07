@@ -19,7 +19,6 @@ public interface StringList {
 
     String get(int index);
 
-   // boolean equals(StringList otherList);
 
     int size();
 

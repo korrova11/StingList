@@ -10,10 +10,11 @@ import java.util.Optional;
 public class StringListImpl implements StringList {
     final String[] list;
 
-    public static int count = 0;
+    private int count;
 
     public StringListImpl(int size) {
         this.list = new String[size];
+        count = 0;
     }
 
     @Override
@@ -49,11 +50,6 @@ public class StringListImpl implements StringList {
         return Arrays.hashCode(list);
     }
 
-    /*@Override
-    public boolean equals(StringList otherList) {
-
-        return equals(otherList);
-    }*/
 
     @Override
     public String add(String item) {
@@ -139,14 +135,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public boolean contains(String item) {
-       /* int i = 0;
-        while (i < count) {
-            if (!list[i].equals(item))
-                i++;
-            else break;
-        }
-        if (i == count) return false;
-        else return true;*/
+
         int i;
         for (i = 0; i < count; i++) {
             if (list[i].equals(item)) break;
@@ -202,6 +191,7 @@ public class StringListImpl implements StringList {
     @Override
     public void clear() {
         Arrays.fill(list, null);
+        count = 0;
 
     }
 
