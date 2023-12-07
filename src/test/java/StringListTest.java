@@ -11,6 +11,8 @@ public class StringListTest {
     String STR1 = "STR1";
     String STR2 = "STR2";
     StringList out = new StringListImpl(4);
+    StringList out1 = new StringListImpl(4);
+    StringList out2 = new StringListImpl(5);
 
 
     @Test
@@ -65,5 +67,77 @@ public class StringListTest {
         assertThrows(NullPointerException.class,()->out.remove(2));
 
     }
+    @Test
+    public void containsTest(){
+        out.add(STR1);
+        assertTrue(out.contains(STR1));
+        assertFalse(out.contains(STR2));
 
-}
+    }
+    @Test
+    public void indexOfTest(){
+        out.add(STR1);
+
+        assertTrue(out.indexOf(STR1)==0);
+        assertTrue(out.indexOf(STR2)==-1);
+
+    }
+    @Test
+    public void indexLastOfTest(){
+        out.add(STR1);
+
+        assertTrue(out.lastIndexOf(STR1)==0);
+        assertTrue(out.lastIndexOf(STR2)==-1);
+
+    }
+    @Test
+    public void getTest() {
+        out.add(STR1);
+        assertTrue(out.get(0).equals(STR1));
+        assertFalse(out.get(0).equals(STR2));
+        assertThrows(ArrayIndexOutOfBoundsException.class,()->out.get(-5));
+        assertThrows(ArrayIndexOutOfBoundsException.class,()->out.get(1));
+
+    }
+    @Test
+    public void equalsTest(){
+        out.add(STR1);
+        out.add(STR2);
+        out1.add(STR1);
+        out1.add(STR2);
+        out2.add(STR1);
+        out2.add(STR2);
+        assertTrue(out.equals(out1));
+        assertFalse(out.equals(out2));
+
+    }
+    @Test
+    public void sizeTest(){
+        out.add(STR1);
+        out.add(STR2);
+        assertTrue(out.size()==2);
+
+    }
+    @Test
+    public void isEmptyTest(){
+        assertTrue(out.isEmpty());
+        out1.add(STR1);
+        assertFalse(out1.isEmpty());
+    }
+    @Test
+    public void clearTest(){
+        out.add(STR1);
+        out.add(STR2);
+        out.clear();
+        assertTrue(out.isEmpty());
+
+    }
+    @Test
+    public void toArrayTest(){
+       StringList str = out.toArray(3);
+        assertTrue(str.isEmpty());
+        str.add("щщ");
+        assertFalse(str.isEmpty());
+
+    }
+    }

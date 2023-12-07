@@ -9,7 +9,8 @@ import java.util.Optional;
 
 public class StringListImpl implements StringList {
     final String[] list;
-    static int count = 0;
+
+    public static int count = 0;
 
     public StringListImpl(int size) {
         this.list = new String[size];
@@ -34,6 +35,25 @@ public class StringListImpl implements StringList {
             throw new ArrayIndexOutOfBoundsException("индекс выходит за границы размера списка");
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StringListImpl that = (StringListImpl) o;
+        return Arrays.equals(list, that.list);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(list);
+    }
+
+    /*@Override
+    public boolean equals(StringList otherList) {
+
+        return equals(otherList);
+    }*/
 
     @Override
     public String add(String item) {
@@ -99,30 +119,14 @@ public class StringListImpl implements StringList {
             }
             count--;
             return item;
-        /*int i = 0;
-        while (!list[i].equals(item)) {
-            i++;
-        }
-        if (i >= list.length) {
-            throw new NotFoundElement("элемента нет в списке");
-        } else {
-            list[i] = null;
-            while (i < list.length - 2) {
-                list[i] = list[i + 1];
-                list[i + 1] = null;
-                i++;
-            }
-            count--;
 
-            return item;
-        }*/
         }
     }
 
     @Override
     public String remove(int index) {
         ifBadIndex(index);
-        if (list[index]==null) throw new NullPointerException("под этим индексом ничего нет");
+        if (list[index] == null) throw new NullPointerException("под этим индексом ничего нет");
         String temp = list[index];
         while (index < count) {
             list[index] = list[index + 1];
@@ -182,12 +186,6 @@ public class StringListImpl implements StringList {
             return list[index];
     }
 
-    @Override
-    public boolean equals(StringList otherList) {
-        if (otherList == null) throw new ListFillException("значение списка null");
-       // return Arrays.equals(list, otherList);
-        return true;
-    }
 
     @Override
     public int size() {
@@ -203,14 +201,14 @@ public class StringListImpl implements StringList {
 
     @Override
     public void clear() {
-        Arrays.fill(list,null);
+        Arrays.fill(list, null);
 
     }
 
     @Override
     public StringList toArray(int size) {
-          StringList str = new StringListImpl(size);
-          return str;
+        StringList str = new StringListImpl(size);
+        return str;
 
     }
 }
