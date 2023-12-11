@@ -43,18 +43,6 @@ public class StringListImpl implements StringList {
         }
     }
 
-//    @Override
-//    public boolean equals(StringList o) {
-//        return Arrays.equals(this.list, o);
-//    }
-
-//    @Override
-//    public boolean equals(StringListImpl o) {
-//        if (this == o) return true;
-//       if (o == null || getClass() != o.getClass()) return false;
-//
-//       return Arrays.equals(list, o.toArray());
-//    }
 
 
     @Override
