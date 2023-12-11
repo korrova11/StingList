@@ -28,7 +28,7 @@ public interface StringList {
 
     String[] toArray();
 
-    boolean equals(StringList otherList);
+    boolean equals(Object o);
 
     int hashCode();
 }

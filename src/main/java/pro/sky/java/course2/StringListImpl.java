@@ -9,7 +9,7 @@ public class StringListImpl implements StringList {
     final String[] list;
     int size;
 
-    private int count;
+     int count;
 
     public StringListImpl(int size) {
         this.size = size;
@@ -19,6 +19,7 @@ public class StringListImpl implements StringList {
 
     public StringListImpl() {
         this.list = new String[10];
+        size = 10;
         count = 0;
     }
 
@@ -42,19 +43,27 @@ public class StringListImpl implements StringList {
         }
     }
 
+//    @Override
+//    public boolean equals(StringList o) {
+//        return Arrays.equals(this.list, o);
+//    }
+
+//    @Override
+//    public boolean equals(StringListImpl o) {
+//        if (this == o) return true;
+//       if (o == null || getClass() != o.getClass()) return false;
+//
+//       return Arrays.equals(list, o.toArray());
+//    }
+
+
     @Override
-    public boolean equals(StringList otherList) {
-        return Arrays.equals(this.toArray(), otherList.toArray());
-    }
-
-
-   /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StringListImpl that = (StringListImpl) o;
         return Arrays.equals(list, that.list);
-    }*/
+    }
 
     @Override
     public int hashCode() {
@@ -66,17 +75,11 @@ public class StringListImpl implements StringList {
     public String add(String item) {
 
         ifNull(item);
-        if (list[list.length - 1] == null) {
-            int i = 0;
-            while (list[i] != null) {
-                i++;
-            }
-            list[i] = item;
+
+        if (count==size)  {throw new ListFillException("лист заполнен");}
+            list[count] = item;
             count++;
             return item;
-        } else {
-            throw new ListFillException("лист заполнен");
-        }
 
     }
 
@@ -208,7 +211,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String[] toArray() {
-        return Arrays.copyOf(this.list, size);
+        return Arrays.copyOf(this.list, size());
 
     }
 }

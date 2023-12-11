@@ -5,12 +5,16 @@ import pro.sky.java.course2.StringListImpl;
 import pro.sky.java.course2.exception.ListFillException;
 import pro.sky.java.course2.exception.NotFoundElement;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StringListTest {
     String STR1 = "STR1";
     String STR2 = "STR2";
-    StringList out = new StringListImpl(4);
+    StringList out = new StringListImpl();
+    StringList out3 = new StringListImpl();
+
     StringList out1 = new StringListImpl(4);
     StringList out2 = new StringListImpl(5);
 
@@ -21,6 +25,7 @@ public class StringListTest {
         assertTrue(out.contains(STR1));
         assertFalse(out.contains(STR2));
         assertThrows(NullPointerException.class, () -> out.add(null));
+        assertEquals(out.size(),  1);
     }
 
     @Test
@@ -111,11 +116,13 @@ public class StringListTest {
     public void equalsTest() {
         out.add(STR1);
         out.add(STR2);
-        out1.add(STR1);
-        out1.add(STR2);
+        out3.add(STR1);
+        out3.add(STR2);
         out2.add(STR1);
         out2.add(STR1);
-        assertTrue(out.equals(out1));
+        assertTrue(Arrays.equals(out.toArray(), out3.toArray()));
+
+        assertTrue(out.equals(out3));
         assertFalse(out.equals(out2));
     }
 
@@ -143,12 +150,5 @@ public class StringListTest {
 
     }
 
-    @Test
-    public void toArrayTest() {
-        out.add(STR1);
-        out.add(STR2);
-       assertTrue(out.equals(out.toArray()));
 
-
-    }
 }

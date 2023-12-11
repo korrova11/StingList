@@ -13,13 +13,7 @@ public class Main {
 
         System.out.println(str2.add("Второй элемент"));
 
-        StringList str= new StringListImpl(4);
-        str.add("Первый элемент");
-        str.add("Второй элемент");
-        str.add("элемент");
-        System.out.println(str.size());
-        System.out.println(str2.size());
-
+        System.out.println(str2.toArray());
 
     }
 }
