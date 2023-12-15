@@ -9,7 +9,7 @@ public class StringListImpl implements StringList {
     final String[] list;
     int size;
 
-     int count;
+    int count;
 
     public StringListImpl(int size) {
         this.size = size;
@@ -44,7 +44,6 @@ public class StringListImpl implements StringList {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,10 +63,12 @@ public class StringListImpl implements StringList {
 
         ifNull(item);
 
-        if (count==size)  {throw new ListFillException("лист заполнен");}
-            list[count] = item;
-            count++;
-            return item;
+        if (count == size) {
+            throw new ListFillException("лист заполнен");
+        }
+        list[count] = item;
+        count++;
+        return item;
 
     }
 

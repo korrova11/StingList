@@ -25,7 +25,7 @@ public class StringListTest {
         assertTrue(out.contains(STR1));
         assertFalse(out.contains(STR2));
         assertThrows(NullPointerException.class, () -> out.add(null));
-        assertEquals(out.size(),  1);
+        assertEquals(out.size(), 1);
     }
 
     @Test
