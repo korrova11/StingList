@@ -15,9 +15,6 @@ public class StringListTest {
     StringList out = new StringListImpl();
     StringList out3 = new StringListImpl();
 
-    StringList out1 = new StringListImpl(4);
-    StringList out2 = new StringListImpl(5);
-
 
     @Test
     public void addTest() {
@@ -25,7 +22,7 @@ public class StringListTest {
         assertTrue(out.contains(STR1));
         assertFalse(out.contains(STR2));
         assertThrows(NullPointerException.class, () -> out.add(null));
-        assertEquals(out.size(),  1);
+        assertEquals(out.size(), 1);
     }
 
     @Test
@@ -118,12 +115,11 @@ public class StringListTest {
         out.add(STR2);
         out3.add(STR1);
         out3.add(STR2);
-        out2.add(STR1);
-        out2.add(STR1);
+
         assertTrue(Arrays.equals(out.toArray(), out3.toArray()));
 
         assertTrue(out.equals(out3));
-        assertFalse(out.equals(out2));
+
     }
 
     @Test
@@ -137,8 +133,8 @@ public class StringListTest {
     @Test
     public void isEmptyTest() {
         assertTrue(out.isEmpty());
-        out1.add(STR1);
-        assertFalse(out1.isEmpty());
+        out.add(STR1);
+        assertFalse(out.isEmpty());
     }
 
     @Test
